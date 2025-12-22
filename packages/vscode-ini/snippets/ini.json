@@ -1,0 +1,102 @@
+{
+  "Section": {
+    "prefix": "sec",
+    "body": ["[${1:SectionName}]", "${2:key} = ${3:value}", "$0"],
+    "description": "Insert a new section"
+  },
+  "Property": {
+    "prefix": "prop",
+    "body": ["${1:key} = ${2:value}"],
+    "description": "Insert a key-value property"
+  },
+  "Comment": {
+    "prefix": "com",
+    "body": ["; ${1:comment}"],
+    "description": "Insert a comment"
+  },
+  "Database Section": {
+    "prefix": "db",
+    "body": [
+      "[Database]",
+      "host = ${1:localhost}",
+      "port = ${2:3306}",
+      "name = ${3:database}",
+      "user = ${4:root}",
+      "password = ${5:}",
+      "$0"
+    ],
+    "description": "Insert a database configuration section"
+  },
+  "Server Section": {
+    "prefix": "srv",
+    "body": [
+      "[Server]",
+      "host = ${1:0.0.0.0}",
+      "port = ${2:8080}",
+      "timeout = ${3:30}",
+      "max_connections = ${4:100}",
+      "$0"
+    ],
+    "description": "Insert a server configuration section"
+  },
+  "Logging Section": {
+    "prefix": "log",
+    "body": [
+      "[Logging]",
+      "level = ${1|debug,info,warning,error,critical|}",
+      "file = ${2:app.log}",
+      "format = ${3:%(asctime)s - %(levelname)s - %(message)s}",
+      "$0"
+    ],
+    "description": "Insert a logging configuration section"
+  },
+  "Application Section": {
+    "prefix": "app",
+    "body": [
+      "[Application]",
+      "name = ${1:MyApp}",
+      "version = ${2:1.0.0}",
+      "debug = ${3|true,false|}",
+      "environment = ${4|development,staging,production|}",
+      "$0"
+    ],
+    "description": "Insert an application configuration section"
+  },
+  "Email Section": {
+    "prefix": "email",
+    "body": [
+      "[Email]",
+      "smtp_host = ${1:smtp.example.com}",
+      "smtp_port = ${2:587}",
+      "username = ${3:user@example.com}",
+      "password = ${4:}",
+      "use_tls = ${5|true,false|}",
+      "$0"
+    ],
+    "description": "Insert an email configuration section"
+  },
+  "Cache Section": {
+    "prefix": "cache",
+    "body": [
+      "[Cache]",
+      "driver = ${1|memory,redis,memcached|}",
+      "host = ${2:localhost}",
+      "port = ${3:6379}",
+      "ttl = ${4:3600}",
+      "$0"
+    ],
+    "description": "Insert a cache configuration section"
+  },
+  "Paths Section": {
+    "prefix": "paths",
+    "body": [
+      "[Paths]",
+      "root = ${1:/app}",
+      "data = ${2:\\${root}/data}",
+      "logs = ${3:\\${root}/logs}",
+      "temp = ${4:\\${root}/temp}",
+      "$0"
+    ],
+    "description": "Insert a paths configuration section"
+  }
+}

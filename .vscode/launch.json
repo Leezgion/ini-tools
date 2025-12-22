@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-ini"
+      ],
+      "outFiles": ["${workspaceFolder}/packages/vscode-ini/out/**/*.js"],
+      "preLaunchTask": "npm: watch"
+    },
+    {
+      "name": "Extension Tests",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-ini",
+        "--extensionTestsPath=${workspaceFolder}/packages/vscode-ini/out/test/suite/index"
+      ],
+      "outFiles": ["${workspaceFolder}/packages/vscode-ini/out/**/*.js"],
+      "preLaunchTask": "npm: watch"
+    }
+  ]
+}

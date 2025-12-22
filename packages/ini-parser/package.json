@@ -1,0 +1,31 @@
+{
+  "name": "@leezgion/ini-parser",
+  "version": "0.1.0",
+  "description": "INI file parser and formatter",
+  "author": "Leezgion",
+  "license": "MIT",
+  "main": "./out/index.js",
+  "types": "./out/index.d.ts",
+  "files": [
+    "out/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Leezgion/ini-tools",
+    "directory": "packages/ini-parser"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "clean": "rimraf out",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "ini",
+    "parser",
+    "config",
+    "configuration"
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "name": "vscode-ini",
+  "displayName": "INI Tools",
+  "description": "Full-featured INI file support: syntax highlighting, folding, outline, formatting, validation and more",
+  "version": "0.1.0",
+  "publisher": "Leezgion",
+  "author": {
+    "name": "Leezgion",
+    "url": "https://github.com/Leezgion"
+  },
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#1E1E1E",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Leezgion/ini-tools",
+    "directory": "packages/vscode-ini"
+  },
+  "bugs": {
+    "url": "https://github.com/Leezgion/ini-tools/issues"
+  },
+  "homepage": "https://github.com/Leezgion/ini-tools#readme",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters",
+    "Linters"
+  ],
+  "keywords": [
+    "ini",
+    "config",
+    "configuration",
+    "properties",
+    "settings"
+  ],
+  "activationEvents": [
+    "onLanguage:ini"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "ini",
+        "aliases": [
+          "INI",
+          "ini",
+          "Ini"
+        ],
+        "extensions": [
+          ".ini",
+          ".cfg",
+          ".conf",
+          ".desktop",
+          ".properties"
+        ],
+        "filenames": [
+          ".editorconfig",
+          "php.ini",
+          "my.cnf"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./assets/ini-icon-light.svg",
+          "dark": "./assets/ini-icon-dark.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ini",
+        "scopeName": "source.ini",
+        "path": "./syntaxes/ini.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "ini",
+        "path": "./snippets/ini.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "ini.format",
+        "title": "Format INI Document",
+        "category": "INI"
+      },
+      {
+        "command": "ini.convertToJson",
+        "title": "Convert INI to JSON",
+        "category": "INI"
+      },
+      {
+        "command": "ini.sortSections",
+        "title": "Sort Sections Alphabetically",
+        "category": "INI"
+      },
+      {
+        "command": "ini.sortKeys",
+        "title": "Sort Keys Alphabetically",
+        "category": "INI"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "ini.format",
+          "when": "editorLangId == ini"
+        },
+        {
+          "command": "ini.convertToJson",
+          "when": "editorLangId == ini"
+        },
+        {
+          "command": "ini.sortSections",
+          "when": "editorLangId == ini"
+        },
+        {
+          "command": "ini.sortKeys",
+          "when": "editorLangId == ini"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "ini.format",
+          "when": "editorLangId == ini",
+          "group": "1_modification@1"
+        },
+        {
+          "command": "ini.convertToJson",
+          "when": "editorLangId == ini",
+          "group": "1_modification@2"
+        },
+        {
+          "command": "ini.sortSections",
+          "when": "editorLangId == ini",
+          "group": "1_modification@3"
+        },
+        {
+          "command": "ini.sortKeys",
+          "when": "editorLangId == ini",
+          "group": "1_modification@4"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "ini.format",
+        "key": "ctrl+alt+f",
+        "mac": "cmd+alt+f",
+        "when": "editorLangId == ini"
+      },
+      {
+        "command": "ini.convertToJson",
+        "key": "ctrl+alt+j",
+        "mac": "cmd+alt+j",
+        "when": "editorLangId == ini"
+      }
+    ],
+    "configuration": {
+      "title": "INI",
+      "properties": {
+        "ini.format.insertSpaces": {
+          "type": "boolean",
+          "default": true,
+          "description": "Insert spaces around the delimiter (=)"
+        },
+        "ini.format.alignValues": {
+          "type": "boolean",
+          "default": false,
+          "description": "Align all values to the same column"
+        },
+        "ini.format.sectionSpacing": {
+          "type": "number",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 5,
+          "description": "Number of blank lines between sections"
+        },
+        "ini.format.sortSections": {
+          "type": "boolean",
+          "default": false,
+          "description": "Sort sections alphabetically during formatting"
+        },
+        "ini.format.sortKeys": {
+          "type": "boolean",
+          "default": false,
+          "description": "Sort keys within sections alphabetically during formatting"
+        },
+        "ini.validation.checkDuplicateSections": {
+          "type": "boolean",
+          "default": true,
+          "description": "Check for duplicate section names"
+        },
+        "ini.validation.checkDuplicateKeys": {
+          "type": "boolean",
+          "default": true,
+          "description": "Check for duplicate keys within sections"
+        },
+        "ini.validation.checkEmptySections": {
+          "type": "boolean",
+          "default": false,
+          "description": "Check for empty sections"
+        }
+      }
+    }
+  },
+  "main": "./dist/extension.js",
+  "scripts": {
+    "vscode:prepublish": "pnpm run build",
+    "build": "node esbuild.js --production",
+    "watch": "node esbuild.js --watch",
+    "clean": "rimraf dist out",
+    "lint": "eslint src --ext ts",
+    "test": "echo \"VS Code extension tests require manual testing - run F5 in VS Code\"",
+    "package": "vsce package --no-dependencies",
+    "publish-ext": "vsce publish --no-dependencies"
+  },
+  "dependencies": {
+    "@leezgion/ini-parser": "workspace:*"
+  },
+  "devDependencies": {}
+}
