@@ -4,10 +4,26 @@
 
 # Changelog
 
-All notable changes to this project will be documented in this file.
+This file tracks high-level repository changes.
+
+- VS Code extension release notes: [packages/vscode-ini/CHANGELOG.md](./packages/vscode-ini/CHANGELOG.md)
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.2.0] - 2026-01-04
+
+### vscode-ini
+
+#### Added
+
+- Quick Fixes for duplicate keys/sections (jump, rename, safe delete).
+- Formatting options (`ini.format.delimiter`, `ini.format.preserveDelimiters`).
+- Parsing option (`ini.parse.inlineCommentMode`).
+
+#### Fixed
+
+- Unified formatting option handling so the format command and the formatting provider behave consistently.
 
 ## [0.1.0] - 2025-12-22
 
@@ -51,10 +67,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # 更新日志
 
-本项目的所有重要更改都将记录在此文件中。
+该文件记录仓库级别的概要变更。
+
+- VS Code 插件的详细发布说明： [packages/vscode-ini/CHANGELOG.md](./packages/vscode-ini/CHANGELOG.md)
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 并且本项目遵守 [语义化版本](https://semver.org/lang/zh-CN/spec/v2.0.0.html)。
+
+## [0.2.0] - 2026-01-04
+
+### vscode-ini
+
+#### 新增
+
+- 新增重复键/重复节的 Quick Fix（跳转、重命名、安全删除）。
+- 新增格式化选项（`ini.format.delimiter`、`ini.format.preserveDelimiters`）。
+- 新增解析选项（`ini.parse.inlineCommentMode`）。
+
+#### 修复
+
+- 统一格式化选项读取逻辑，使“格式化命令”和“格式化提供器”的行为保持一致。
 
 ## [0.1.0] - 2025-12-22
 

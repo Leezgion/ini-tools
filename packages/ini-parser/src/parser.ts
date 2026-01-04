@@ -13,7 +13,65 @@ const DEFAULT_OPTIONS: Required<ParseOptions> = {
   allowDuplicateKeys: false,
   commentMarkers: [';', '#'],
   delimiters: ['=', ':'],
+  inlineCommentMode: 'legacy',
 };
+
+function stripInlineCommentLegacy(
+  value: string,
+  commentMarkers: string[]
+): string {
+  let cleanValue = value;
+  for (const marker of commentMarkers) {
+    const commentIndex = cleanValue.indexOf(marker);
+    if (commentIndex !== -1) {
+      cleanValue = cleanValue.substring(0, commentIndex).trim();
+    }
+  }
+  return cleanValue;
+}
+
+function stripInlineCommentSmart(
+  value: string,
+  commentMarkers: string[]
+): string {
+  let inSingle = false;
+  let inDouble = false;
+  let escaped = false;
+
+  for (let i = 0; i < value.length; i++) {
+    const ch = value[i];
+
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+
+    if (ch === '\\') {
+      escaped = true;
+      continue;
+    }
+
+    if (ch === "'" && !inDouble) {
+      inSingle = !inSingle;
+      continue;
+    }
+
+    if (ch === '"' && !inSingle) {
+      inDouble = !inDouble;
+      continue;
+    }
+
+    if (!inSingle && !inDouble && commentMarkers.includes(ch)) {
+      const prev = i > 0 ? value[i - 1] : '';
+      const precededByWhitespace = i === 0 || /\s/.test(prev);
+      if (precededByWhitespace) {
+        return value.substring(0, i).trim();
+      }
+    }
+  }
+
+  return value;
+}
 
 /**
  * Create a position object
@@ -114,11 +172,10 @@ export function parse(text: string, options?: ParseOptions): IniDocument {
 
         // Remove inline comments from value
         let cleanValue = value;
-        for (const marker of opts.commentMarkers) {
-          const commentIndex = cleanValue.indexOf(marker);
-          if (commentIndex !== -1) {
-            cleanValue = cleanValue.substring(0, commentIndex).trim();
-          }
+        if (opts.inlineCommentMode === 'legacy') {
+          cleanValue = stripInlineCommentLegacy(value, opts.commentMarkers);
+        } else if (opts.inlineCommentMode === 'smart') {
+          cleanValue = stripInlineCommentSmart(value, opts.commentMarkers);
         }
 
         const property: PropertyNode = {

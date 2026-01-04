@@ -7,6 +7,7 @@ const DEFAULT_FORMAT_OPTIONS: Required<FormatOptions> = {
   sortSections: false,
   sortKeys: false,
   delimiter: '=',
+  preserveDelimiters: false,
 };
 
 /**
@@ -18,19 +19,21 @@ export function format(doc: IniDocument, options?: FormatOptions): string {
 
   // Helper to format a property line
   const formatProperty = (
-    key: string,
-    value: string,
+    property: { key: string; value: string; delimiter?: '=' | ':' },
     maxKeyLength?: number
   ): string => {
-    const delimiter = opts.delimiter;
+    const delimiter =
+      opts.preserveDelimiters && property.delimiter
+        ? property.delimiter
+        : opts.delimiter;
     if (opts.insertSpaces) {
       if (opts.alignValues && maxKeyLength) {
-        const padding = ' '.repeat(maxKeyLength - key.length);
-        return `${key}${padding} ${delimiter} ${value}`;
+        const padding = ' '.repeat(maxKeyLength - property.key.length);
+        return `${property.key}${padding} ${delimiter} ${property.value}`;
       }
-      return `${key} ${delimiter} ${value}`;
+      return `${property.key} ${delimiter} ${property.value}`;
     }
-    return `${key}${delimiter}${value}`;
+    return `${property.key}${delimiter}${property.value}`;
   };
 
   // Format global comments
@@ -50,7 +53,7 @@ export function format(doc: IniDocument, options?: FormatOptions): string {
     }
 
     for (const prop of properties) {
-      lines.push(formatProperty(prop.key, prop.value, maxKeyLength));
+      lines.push(formatProperty(prop, maxKeyLength));
     }
   }
 
@@ -89,7 +92,7 @@ export function format(doc: IniDocument, options?: FormatOptions): string {
     }
 
     for (const prop of properties) {
-      lines.push(formatProperty(prop.key, prop.value, maxKeyLength));
+      lines.push(formatProperty(prop, maxKeyLength));
     }
 
     // Add spacing between sections

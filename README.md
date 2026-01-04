@@ -15,25 +15,16 @@ A comprehensive toolkit for INI file support, including a high-performance parse
 
 This repository is a monorepo managed by [Turbo](https://turbo.build/) and [pnpm](https://pnpm.io/), containing:
 
-- **[vscode-ini](./packages/vscode-ini)**: The VS Code extension providing syntax highlighting, formatting, and validation.
-- **[ini-parser](./packages/ini-parser)**: A robust TypeScript library for parsing, formatting, and manipulating INI data.
+- **[vscode-ini](./packages/vscode-ini)**: The VS Code extension providing syntax highlighting, formatting, validation and Quick Fix.
+- **[ini-parser](./packages/ini-parser)**: A robust TypeScript library for parsing, formatting, validating, and converting INI.
 
-## Features
+## Documentation
 
-### VS Code Extension
-
-- **Syntax Highlighting**: Beautiful colors for sections, keys, values, and comments.
-- **Formatting**: Auto-format with configurable spacing and alignment.
-- **Validation**: Detect duplicate keys and sections.
-- **Outline View**: Easy navigation through large files.
-- **Snippets**: Quick templates for common configurations.
-
-### Parser Library
-
-- **Parse**: Convert INI strings to typed JavaScript objects.
-- **Stringify**: Convert objects back to valid INI strings.
-- **AST Access**: Low-level access to the Abstract Syntax Tree.
-- **Preserve Comments**: Keep comments intact during round-trip operations.
+- VS Code extension
+  - README: [packages/vscode-ini/README.md](./packages/vscode-ini/README.md)
+  - Changelog: [packages/vscode-ini/CHANGELOG.md](./packages/vscode-ini/CHANGELOG.md)
+- Parser library
+  - README: [packages/ini-parser/README.md](./packages/ini-parser/README.md)
 
 ## Development
 
@@ -72,25 +63,16 @@ pnpm test
 
 本项目是一个由 [Turbo](https://turbo.build/) 和 [pnpm](https://pnpm.io/) 管理的 Monorepo，包含：
 
-- **[vscode-ini](./packages/vscode-ini)**: VS Code 插件，提供语法高亮、格式化和校验功能。
-- **[ini-parser](./packages/ini-parser)**: 强大的 TypeScript 库，用于解析、格式化和操作 INI 数据。
+- **[vscode-ini](./packages/vscode-ini)**：VS Code 插件，提供语法高亮、格式化、校验与 Quick Fix。
+- **[ini-parser](./packages/ini-parser)**：TypeScript 解析库，支持解析、格式化、校验与转换。
 
-## 功能特性
+## 文档入口
 
-### VS Code 插件
-
-- **语法高亮**：为节（Section）、键、值和注释提供精美的配色。
-- **代码格式化**：支持自定义间距和对齐方式的自动格式化。
-- **代码校验**：实时检测重复的键和节。
-- **大纲视图**：轻松导航大型配置文件。
-- **代码片段**：常用配置的快速模板。
-
-### 解析库 (Parser Library)
-
-- **解析**：将 INI 字符串转换为类型化的 JavaScript 对象。
-- **序列化**：将对象转换回合法的 INI 字符串。
-- **AST 访问**：提供对抽象语法树的底层访问能力。
-- **保留注释**：在读写操作中完整保留注释信息。
+- VS Code 插件
+  - README： [packages/vscode-ini/README.md](./packages/vscode-ini/README.md)
+  - 更新日志： [packages/vscode-ini/CHANGELOG.md](./packages/vscode-ini/CHANGELOG.md)
+- 解析库
+  - README： [packages/ini-parser/README.md](./packages/ini-parser/README.md)
 
 ## 开发指南
 

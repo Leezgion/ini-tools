@@ -6,6 +6,26 @@
 
 All notable changes to the "vscode-ini" extension will be documented in this file.
 
+## [0.2.0] - 2026-01-04
+
+### Added
+
+- Quick Fix code actions for duplicate sections/keys:
+  - Go to first definition
+  - Rename duplicate (append `_2`, `_3`, ...)
+  - Delete duplicate (safe delete)
+- New formatting options:
+  - `ini.format.delimiter`
+  - `ini.format.preserveDelimiters`
+- New parsing option:
+  - `ini.parse.inlineCommentMode` (`legacy` | `smart` | `none`)
+- New validation option:
+  - `ini.validation.checkEmptySections`
+
+### Fixed
+
+- Unified formatting option handling so the format command and the formatting provider behave consistently.
+
 ## [0.1.0] - 2025-12-22
 
 ### Added
@@ -24,6 +44,26 @@ All notable changes to the "vscode-ini" extension will be documented in this fil
 # 更新日志
 
 "vscode-ini" 插件的所有重要更改都将记录在此文件中。
+
+## [0.2.0] - 2026-01-04
+
+### 新增
+
+- 为重复节/重复键提供 Quick Fix：
+  - 跳转到首次定义
+  - 自动重命名重复项（追加 `_2`、`_3`...）
+  - 删除当前重复项（安全删除）
+- 新增格式化选项：
+  - `ini.format.delimiter`
+  - `ini.format.preserveDelimiters`
+- 新增解析选项：
+  - `ini.parse.inlineCommentMode`（`legacy` | `smart` | `none`）
+- 新增校验选项：
+  - `ini.validation.checkEmptySections`
+
+### 修复
+
+- 统一格式化选项读取逻辑，使“格式化命令”和“格式化提供器”的行为保持一致。
 
 ## [0.1.0] - 2025-12-22
 

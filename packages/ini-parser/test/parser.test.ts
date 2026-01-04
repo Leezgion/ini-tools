@@ -68,6 +68,45 @@ key: value`;
       expect(doc.sections[0].properties[0].delimiter).toBe(':');
       expect(doc.sections[0].properties[0].value).toBe('value');
     });
+
+    it('should strip inline comments in legacy mode (default)', () => {
+      const content = `[Section]
+url = http://example.com/a#frag ; trailing`;
+
+      const doc = parse(content);
+      // legacy behavior strips at the first marker occurrence
+      expect(doc.sections[0].properties[0].value).toBe('http://example.com/a');
+    });
+
+    it('should keep # and ; inside quotes in smart mode', () => {
+      const content = `[Section]
+password = "a#b" ; comment
+note = 'x;y' # comment`;
+
+      const doc = parse(content, { inlineCommentMode: 'smart' });
+      expect(doc.sections[0].properties[0].value).toBe('"a#b"');
+      expect(doc.sections[0].properties[1].value).toBe("'x;y'");
+    });
+
+    it('should not strip URL fragments in smart mode', () => {
+      const content = `[Section]
+url = http://example.com/a#frag`;
+
+      const doc = parse(content, { inlineCommentMode: 'smart' });
+      expect(doc.sections[0].properties[0].value).toBe(
+        'http://example.com/a#frag'
+      );
+    });
+
+    it('should not strip anything in none mode', () => {
+      const content = `[Section]
+value = abc ; still part of value`;
+
+      const doc = parse(content, { inlineCommentMode: 'none' });
+      expect(doc.sections[0].properties[0].value).toBe(
+        'abc ; still part of value'
+      );
+    });
   });
 
   describe('format', () => {
@@ -116,6 +155,31 @@ apple = 2`;
       expect(formatted.indexOf('apple')).toBeLessThan(
         formatted.indexOf('zebra')
       );
+    });
+
+    it('should preserve property delimiters when option is set', () => {
+      const content = `[Section]
+      a: 1
+      b = 2`;
+
+      const doc = parse(content);
+      const formatted = format(doc, {
+        preserveDelimiters: true,
+        delimiter: '=',
+        insertSpaces: true,
+      });
+
+      expect(formatted).toContain('a : 1');
+      expect(formatted).toContain('b = 2');
+    });
+
+    it('should not preserve delimiters by default', () => {
+      const content = `[Section]
+      a: 1`;
+
+      const doc = parse(content);
+      const formatted = format(doc);
+      expect(formatted).toContain('a = 1');
     });
   });
 

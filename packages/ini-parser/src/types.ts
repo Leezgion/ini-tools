@@ -130,6 +130,14 @@ export interface FormatOptions {
    * @default '='
    */
   delimiter?: '=' | ':';
+
+  /**
+   * Preserve each property's original delimiter (from parsing) when formatting.
+   * When enabled, the formatter prefers the delimiter found on each PropertyNode.
+   *
+   * @default false
+   */
+  preserveDelimiters?: boolean;
 }
 
 /**
@@ -159,4 +167,16 @@ export interface ParseOptions {
    * @default ['=', ':']
    */
   delimiters?: string[];
+
+  /**
+   * How to treat inline comments that appear after a value.
+   *
+   * - 'legacy': strip everything after the first ';' or '#' occurrence (current behavior).
+   * - 'smart': strip only when the marker appears outside quotes, and is either at the start
+   *   of the value or preceded by whitespace.
+   * - 'none': do not strip inline comments.
+   *
+   * @default 'legacy'
+   */
+  inlineCommentMode?: 'legacy' | 'smart' | 'none';
 }
